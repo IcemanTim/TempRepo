@@ -7,29 +7,25 @@
 
 from tkinter import *
 import string
+from random import randint
 
-def change():
-    global colour 
-    global colourselection
-    global count 
-    if (count < 2 ):
-        colour = colourselection[count]
-        button.configure(bg = colour)
-        count + 1
-    else:
-        colour = colourselection[count]
-        button.configure(bg = colour)
-        count = 1 
+def change(event, widget):
+	global colours
+	num = randint(0, len(colours)-1)
+	colour = colours[num][3]
+	print(colour)
+	widget["text"] = "My colour now is \"" + colour + "\""
+	widget["bg"] = colour
 
 def show_msg(event):
     print ("Second Button!")
 
 def add_two_buttons(event):
 	But = Button(root, text="Press and change the label's colour!")
-	But.bind('<Button-1>', show_msg)
+	But.bind('<Button-1>', lambda event: change(event, Txt))
 	But.grid(row=0, column=0, sticky=E+W+S+N)
 
-	Txt = Label(root, text="My colour now is", bg="PeachPuff")
+	Txt = Label(root, text="I'm white now", bg="white")
 	Txt.grid(row=0, column=1, sticky=E+W+N+S)
 
 	Exit = Button(root, text="Quit!", command=root.quit)
@@ -75,10 +71,6 @@ f = open('colours.txt', 'r')
 
 global colours
 colours = []
-global count 
-count = 1
-
-colour = ""
 
 for line in f:
 	l = len(line)
