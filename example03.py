@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-'''
-Пример для первой лекции про TkInter
-
-Закрытие окошка в постинтерактивном режиме
-'''
 
 from tkinter import *
 import string
@@ -35,7 +30,7 @@ TKroot = Tk()
 TKroot.title("Hello")
 
 root = Frame(TKroot)
-root.place(relx=0, rely=0, relheight=1, relwidth=1)
+root.pack(fill=BOTH, expand=True)
 
 width = 780
 height = 400
