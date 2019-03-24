@@ -15,9 +15,6 @@ def change(event, widget):
 	widget["bg"] = colour_bg
 	widget["fg"] = colour_fg
 
-def show_msg(event):
-    print ("Second Button!")
-
 def add_two_buttons(event):
 	But = Button(root, text="Press and change the label's colour!")
 	But.bind('<Button-1>', lambda event: change(event, BG_Txt))
