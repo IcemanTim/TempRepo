@@ -6,31 +6,39 @@ from random import randint
 
 def change(event, widget):
 	global colours
-	num = randint(0, len(colours)-1)
-	colour = colours[num][3]
-	print(colour)
-	widget["text"] = "My colour now is \"" + colour + "\""
-	widget["bg"] = colour
+	num1 = randint(0, len(colours)-1)
+	num2 = randint(0, len(colours)-1)
+	colour_bg = colours[num1][3]
+	colour_fg = colours[num2][3]
+	print(colour_bg," ", colour_fg)
+	widget["text"] = "My colour now is "
+	widget["bg"] = colour_bg
+	widget["fg"] = colour_fg
 
 def show_msg(event):
     print ("Second Button!")
 
 def add_two_buttons(event):
 	But = Button(root, text="Press and change the label's colour!")
-	But.bind('<Button-1>', lambda event: change(event, Txt))
+	But.bind('<Button-1>', lambda event: change(event, BG_Txt))
+
+	BG_Txt = Label(root, text="My colour now is", bg="white")
+
+	Delimeter.grid(row=1, column=0, columnspan=3, sticky=N+S+E+W)
+	Txt.grid(row=2, column=0, columnspan=3, sticky=N+S+E+W)
+
+	BG_Txt.grid(row=0, column=1, sticky=E+W+N+S)
+	Exit.grid(row=0, column=2, sticky=E+W+S+N)
 	But.grid(row=0, column=0, sticky=E+W+S+N)
 
-	Txt = Label(root, text="I'm white now", bg="white")
-	Txt.grid(row=0, column=1, sticky=E+W+N+S)
+	root.columnconfigure(2, weight=1)
 
-	Exit = Button(root, text="Quit!", command=root.quit)
-	Exit.grid(row=0, column=2, sticky=E+W+S+N)
 
 TKroot = Tk()
 TKroot.title("Hello")
 
 root = Frame(TKroot)
-root.pack(fill=BOTH, expand=True)
+root.place(relx=0, rely=0, relheight=1, relwidth=1)
 
 width = 780
 height = 400
@@ -42,23 +50,22 @@ TKroot.geometry('%dx%d+%d+%d' % (width, height, osx, osy))
 
 root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=1)
-root.columnconfigure(2, weight=1)
 root.rowconfigure(0, weight=1)
-root.rowconfigure(1, weight=0)
-root.rowconfigure(2, weight=1)
+root.rowconfigure(1, weight=1)
+root.rowconfigure(2,weight=1)
 
 But_Add = Button(root, text="Add")
 But_Add.bind('<Button-1>', add_two_buttons)
-But_Add.grid(row=0, column=0, sticky=E+W+S+N)
+But_Add.grid(row=0, column=0, sticky=E+W)
 
 Exit = Button(root, text="Quit!", command=root.quit)
-Exit.grid(row=0, column=1, sticky=E+W+S+N)
+Exit.grid(row=0, column=1, sticky=E+W)
 
-BG_label = Label(root, bg="black")
-BG_label.grid(row=1, column=0, columnspan=3, sticky=E+W+N+S)
+Delimeter = Label(root, bg="black")
+Delimeter.grid(row=1, column=0, columnspan=2, sticky=N+S+E+W)
 
 Txt = Label(root, text="This is a label", bg="PeachPuff")
-Txt.grid(row=2, column=0, columnspan=3, sticky=E+W+N+S)
+Txt.grid(row=2, column=0, columnspan=2, sticky=E+W+N+S)
 
 #----------------------------------------------------
 
